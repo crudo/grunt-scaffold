@@ -47,7 +47,7 @@ grunt.initConfig({
 #### options.questions
 Type: `Array`
 
-See (Inquirer.js questions)[https://github.com/SBoudrias/Inquirer.js#question] for more info.
+See [Inquirer.js questions](https://github.com/SBoudrias/Inquirer.js#question) for more info.
 
 #### options.template
 Type: `Object`
@@ -76,7 +76,7 @@ filter: function (result) {
 
 ## Thx
 
-This plugin is inspired by (grunt-prompt)[https://github.com/dylang/grunt-prompt] and (scaffolding)[https://github.com/sideroad/scaffolding].
+This plugin is inspired by [grunt-prompt](https://github.com/dylang/grunt-prompt) and [scaffolding](https://github.com/sideroad/scaffolding).
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
