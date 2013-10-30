@@ -1,0 +1,45 @@
+{
+  "name": "grunt-scaffold",
+  "description": "Scaffold what you want.",
+  "version": "0.1.0",
+
+  "homepage": "https://github.com/crudo/grunt-scaffold",
+
+  "author": {
+    "name": "crudo",
+    "email": "crudo@crudo.cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/crudo/grunt-scaffold.git"
+  },
+  "bugs": {
+    "url": "https://github.com/crudo/grunt-scaffold/issues"
+  },
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "inquirer": "~0.3.4",
+    "wrench": "~1.5.4",
+    "mustache": "~0.7.2"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.7.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-nodeunit": "~0.2.2",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt": "~0.4.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin", "scaffold", "scaffolding", "create", "setup", "interactive", "skeleton"
+  ],
+  "readmeFilename": "README.md"
+}
