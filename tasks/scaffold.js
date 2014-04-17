@@ -69,6 +69,9 @@ module.exports = function(grunt) {
             var done = this.async();
             inquirer.prompt(questions, function(result) {
                 _process(result);
+                if (options.then && _.isFunction(options.then)) {
+                    options.then(result);
+                }
                 done();
             });
         }else{

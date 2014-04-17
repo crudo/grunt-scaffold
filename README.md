@@ -74,6 +74,11 @@ filter: function (result) {
 }
 ```
 
+#### options.then
+Type: `Function`
+
+This function receives the hash of all user answers.
+
 ## Thx
 
 This plugin is inspired by [grunt-prompt](https://github.com/dylang/grunt-prompt) and [scaffolding](https://github.com/sideroad/scaffolding).
