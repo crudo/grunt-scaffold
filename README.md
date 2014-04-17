@@ -74,6 +74,16 @@ filter: function (result) {
 }
 ```
 
+#### options.before
+Type: `Function`
+
+Callback called before templates are processed task.
+
+#### options.after
+Type: `Function`
+
+Callback called after templates are processed task.
+
 ## Thx
 
 This plugin is inspired by [grunt-prompt](https://github.com/dylang/grunt-prompt) and [scaffolding](https://github.com/sideroad/scaffolding).
