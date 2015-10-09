@@ -1,4 +1,4 @@
-# grunt-scaffold
+# grunt-scaffold [![Build Status](https://travis-ci.org/crudo/grunt-scaffold.svg)](https://travis-ci.org/crudo/grunt-scaffold)
 
 >Scaffold what you want.
 
