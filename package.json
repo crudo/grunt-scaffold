@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "inquirer": "0.12.0",
-    "wrench": "1.5.8",
+    "wrench": "1.5.9",
     "mustache": "2.2.1"
   },
   "devDependencies": {
