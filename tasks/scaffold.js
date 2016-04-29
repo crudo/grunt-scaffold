@@ -72,13 +72,17 @@ module.exports = function(grunt) {
         if (questions) {
             var done = this.async();
             inquirer.prompt(questions, function(result) {
+
                 if(options.postQuestions && _.isFunction(options.postQuestions)){
                     options.postQuestions(result);
                 }
+
                 _process(result);
+
                 if (options.after && _.isFunction(options.after)) {
                     options.after(result);
                 }
+
                 done();
             });
         }else{
