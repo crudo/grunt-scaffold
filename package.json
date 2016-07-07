@@ -22,7 +22,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "inquirer": "1.0.2",
+    "inquirer": "1.1.2",
     "wrench": "1.5.9",
     "mustache": "2.2.1"
   },
