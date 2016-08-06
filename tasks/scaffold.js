@@ -29,6 +29,10 @@ module.exports = function(grunt) {
                 result = options.filter(result);
             }
 
+            if (_.isFunction(template)) {
+                template = template(result);
+            }
+
             Object.keys(template).forEach(function(key){
                 var dist = mustache.render(template[key], result),
                     distDir = path.dirname(dist);
