@@ -3,10 +3,7 @@
   "description": "Scaffold what you want.",
   "version": "0.3.0",
   "homepage": "https://github.com/crudo/grunt-scaffold",
-  "author": {
-    "name": "crudo",
-    "email": "crudo@crudo.cz"
-  },
+  "author": "crudo <crudo@crudo.cz>",
   "repository": {
     "type": "git",
     "url": "git://github.com/crudo/grunt-scaffold.git"
@@ -34,7 +31,7 @@
     "grunt": "1.0.1"
   },
   "peerDependencies": {
-    "grunt": ">=0.4.0"
+    "grunt": "0.4.0 - 1"
   },
   "keywords": [
     "gruntplugin",
@@ -45,5 +42,8 @@
     "interactive",
     "skeleton"
   ],
-  "readmeFilename": "README.md"
+  "directories": {
+    "test": "test"
+  },
+  "license": "MIT"
 }
