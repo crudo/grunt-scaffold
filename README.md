@@ -64,7 +64,7 @@ When the prompt for name is answered 'Button', then program processes content of
 #### options.filter
 Type: `Function`
 
-Function where user ansers can be modified/adjusted. This function receives the hash of all user answers.
+Function where user answers can be modified/adjusted. This function receives the hash of all user answers.
 
 eg.
 ```
@@ -94,7 +94,7 @@ Callback called after questions are asked and before templates are processed tas
 This plugin is inspired by [grunt-prompt](https://github.com/dylang/grunt-prompt) and [scaffolding](https://github.com/sideroad/scaffolding).
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+In lieu of a formal style-guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## License
 
