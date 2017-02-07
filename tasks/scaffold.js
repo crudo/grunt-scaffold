@@ -75,8 +75,7 @@ module.exports = function(grunt) {
 
         if (questions) {
             var done = this.async();
-            inquirer.prompt(questions, function(result) {
-
+            inquirer.prompt(questions).then(function (result) {
                 if(options.postQuestions && _.isFunction(options.postQuestions)){
                     options.postQuestions(result);
                 }
@@ -87,6 +86,9 @@ module.exports = function(grunt) {
                     options.after(result);
                 }
 
+                done();
+            }).catch(function (err) {
+                grunt.fail.warn(err.message);
                 done();
             });
         }else{
