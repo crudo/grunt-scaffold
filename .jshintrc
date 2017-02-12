@@ -1,0 +1,10 @@
+{
+    "globalstrict": true,
+    "globals": {
+        "require": true,
+        "module": true,
+        "exports": true,
+        "describe": true,
+        "it": true
+    }
+}
