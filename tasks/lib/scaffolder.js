@@ -1,10 +1,11 @@
 'use strict';
 
 const mustache = require('mustache');
-const wrench = require('wrench');
+const fse = require('fs-extra');
+const readRecursive = require('fs-readdir-recursive');
 const path = require('path');
 const fs = require('fs');
-const _ = require('lodash');
+const isFunction = require('lodash.isfunction');
 
 /* eslint-disable func-names */
 exports.init = (grunt) => {
@@ -12,19 +13,19 @@ exports.init = (grunt) => {
         run(inquirer, options, done) {
             const questions = options.questions;
 
-            if (options.before && _.isFunction(options.before)) {
+            if (options.before && isFunction(options.before)) {
                 options.before();
             }
 
             if (questions) {
                 inquirer.prompt(questions).then((result) => {
-                    if (options.postQuestions && _.isFunction(options.postQuestions)) {
+                    if (options.postQuestions && isFunction(options.postQuestions)) {
                         options.postQuestions(result);
                     }
 
                     this.process(result, options, () => {});
 
-                    if (options.after && _.isFunction(options.after)) {
+                    if (options.after && isFunction(options.after)) {
                         options.after(result);
                     }
 
@@ -43,11 +44,11 @@ exports.init = (grunt) => {
             let modResult = result;
             let template = options.template || {};
 
-            if (options.filter && _.isFunction(options.filter)) {
+            if (options.filter && isFunction(options.filter)) {
                 modResult = options.filter(result);
             }
 
-            if (_.isFunction(template)) {
+            if (isFunction(template)) {
                 template = template(modResult);
             }
 
@@ -56,7 +57,7 @@ exports.init = (grunt) => {
                 const distDir = path.dirname(dist);
 
                 if (fs.statSync(key).isFile()) {
-                    wrench.mkdirSyncRecursive(distDir);
+                    fse.ensureDirSync(distDir);
 
                     fs.writeFileSync(
                         dist,
@@ -66,9 +67,9 @@ exports.init = (grunt) => {
                         )
                     );
                 } else {
-                    wrench.mkdirSyncRecursive(distDir);
-                    wrench.copyDirSyncRecursive(key, dist);
-                    wrench.readdirSyncRecursive(dist).forEach((file) => {
+                    fse.ensureDirSync(distDir);
+                    fse.copySync(key, dist);
+                    readRecursive(dist).forEach((file) => {
                         const modFile = path.join(dist, file);
 
                         fs.writeFileSync(
