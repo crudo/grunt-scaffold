@@ -1,57 +1,59 @@
 'use strict';
 
-var mustache = require('mustache'),
-    wrench = require('wrench'),
-    path = require('path'),
-    fs = require('fs'),
-    _ = require('lodash');
+const mustache = require('mustache');
+const wrench = require('wrench');
+const path = require('path');
+const fs = require('fs');
+const _ = require('lodash');
 
-exports.init = function(grunt) {
+/* eslint-disable func-names */
+exports.init = (grunt) => {
     return {
-        run: function (inquirer, options, done) {
-            var questions = options.questions;
+        run(inquirer, options, done) {
+            const questions = options.questions;
 
             if (options.before && _.isFunction(options.before)) {
                 options.before();
             }
 
             if (questions) {
-                inquirer.prompt(questions).then(function (result) {
+                inquirer.prompt(questions).then((result) => {
                     if (options.postQuestions && _.isFunction(options.postQuestions)) {
                         options.postQuestions(result);
                     }
 
-                    this.process(result, options, function () {});
+                    this.process(result, options, () => {});
 
                     if (options.after && _.isFunction(options.after)) {
                         options.after(result);
                     }
 
                     done();
-                }.bind(this)).catch(function (err) {
+                }).catch((err) => {
                     grunt.fail.warn(err.message);
                     done();
-                }.bind(this));
-
+                });
             } else {
-                this.process({}, options, function () {});
+                this.process({}, options, () => {});
                 done();
             }
         },
-        process: function(result, options, done) {
-            var template = options.template || {};
+
+        process(result, options, done) {
+            let modResult = result;
+            let template = options.template || {};
 
             if (options.filter && _.isFunction(options.filter)) {
-                result = options.filter(result);
+                modResult = options.filter(result);
             }
 
             if (_.isFunction(template)) {
-                template = template(result);
+                template = template(modResult);
             }
 
-            Object.keys(template).forEach(function(key){
-                var dist = mustache.render(template[key], result),
-                    distDir = path.dirname(dist);
+            Object.keys(template).forEach((key) => {
+                const dist = mustache.render(template[key], result);
+                const distDir = path.dirname(dist);
 
                 if (fs.statSync(key).isFile()) {
                     wrench.mkdirSyncRecursive(distDir);
@@ -66,13 +68,13 @@ exports.init = function(grunt) {
                 } else {
                     wrench.mkdirSyncRecursive(distDir);
                     wrench.copyDirSyncRecursive(key, dist);
-                    wrench.readdirSyncRecursive(dist).forEach(function(file){
-                        file = path.join(dist, file);
+                    wrench.readdirSyncRecursive(dist).forEach((file) => {
+                        const modFile = path.join(dist, file);
 
                         fs.writeFileSync(
-                            mustache.render(file, result),
+                            mustache.render(modFile, result),
                             mustache.render(
-                                fs.readFileSync(file, 'utf-8'),
+                                fs.readFileSync(modFile, 'utf-8'),
                                 result
                             ),
                             'utf-8'

@@ -1,3 +1,5 @@
+'use strict';
+
 /*
  * grunt-scaffold
  * https://github.com/crudo/grunt-scaffold
@@ -6,13 +8,13 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
+module.exports = (grunt) => {
+    /* eslint-disable global-require */
+    const inquirer = require('inquirer');
+    const scaffolder = require('./lib/scaffolder').init(grunt);
 
-module.exports = function(grunt) {
-    grunt.registerMultiTask('scaffold', 'Scaffold what you want.', function() {
-        var inquirer = require('inquirer');
-        var scaffolder = require('./lib/scaffolder').init(grunt);
-
-        scaffolder.run(inquirer, this.options(), this.async());
+    grunt.registerMultiTask('scaffold', 'Scaffold what you want.', () => {
+        const currentTask = grunt.task.current;
+        scaffolder.run(inquirer, currentTask.options(), currentTask.async());
     });
 };

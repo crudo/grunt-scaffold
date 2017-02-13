@@ -1,116 +1,116 @@
 'use strict';
 
-var grunt = require('grunt');
-var expect = require('expect.js');
-var sinon = require('sinon');
-var config = require('../config');
-var scaffolder = require('../tasks/lib/scaffolder').init(grunt);
+const grunt = require('grunt');
+const expect = require('expect.js');
+const sinon = require('sinon');
+const config = require('../config');
+const scaffolder = require('../tasks/lib/scaffolder').init(grunt);
 
-var _scaffold = function (key, cb) {
+const testScaffold = (key, cb) => {
     scaffolder.process(config.scaffold[key], config.scaffold[key].options, cb);
 };
 
-var inquirerMock = function (result) {
+const inquirerMock = (result) => {
     return {
-        prompt: function () {
+        prompt: () => {
             return {
-                then: function (fn) {
+                then: (fn) => {
                     fn(result);
                 }
-            }
+            };
         }
-    }
+    };
 };
 
-describe('Scaffolder', function() {
-    it('should run scaffolder', function(done) {
-        var opts = {};
+describe('Scaffolder', () => {
+    it('should run scaffolder', (done) => {
+        const opts = {};
 
         scaffolder.run(inquirerMock(), opts, done);
     });
 
-    it('should run scaffolder with before callback', function(done) {
-        var beforeCallback = sinon.spy();
+    it('should run scaffolder with before callback', (done) => {
+        const beforeCallback = sinon.spy();
 
-        var opts = {
+        const opts = {
             before: beforeCallback
         };
 
-        scaffolder.run(inquirerMock(), opts, function () {
+        scaffolder.run(inquirerMock(), opts, () => {
             expect(beforeCallback.callCount).to.be(1);
             done();
         });
     });
 
-    it('should run scaffolder with after callback', function(done) {
-        var afterCallback = sinon.spy();
+    it('should run scaffolder with after callback', (done) => {
+        const afterCallback = sinon.spy();
 
-        var opts = {
+        const opts = {
             questions: [],
             after: afterCallback
         };
 
-        scaffolder.run(inquirerMock(), opts, function () {
+        scaffolder.run(inquirerMock(), opts, () => {
             expect(afterCallback.callCount).to.be(1);
             done();
         });
     });
 
-    it('should run inquirer with postQuestions', function(done) {
-        var postCallback = sinon.spy();
+    it('should run inquirer with postQuestions', (done) => {
+        const postCallback = sinon.spy();
 
-        var opts = {
+        const opts = {
             questions: [],
             postQuestions: postCallback
         };
 
-        scaffolder.run(inquirerMock(), opts, function () {
+        scaffolder.run(inquirerMock(), opts, () => {
             expect(postCallback.callCount).to.be(1);
             done();
         });
     });
 
-    it('should scaffold according to no_template spec', function(done) {
-        _scaffold('no_template', function () {
+    it('should scaffold according to no_template spec', (done) => {
+        testScaffold('no_template', () => {
             // edge case
             done();
         });
     });
 
-    it('should scaffold according to simple spec', function(done) {
-        _scaffold('simple', function () {
-            var actual = grunt.file.read('tmp/Simple.js');
-            var expected = grunt.file.read('test/expected/Simple.js');
+    it('should scaffold according to simple spec', (done) => {
+        testScaffold('simple', () => {
+            const actual = grunt.file.read('tmp/Simple.js');
+            const expected = grunt.file.read('test/expected/Simple.js');
             expect(actual).to.eql(expected);
             done();
         });
     });
 
-    it('should scaffold according to filter spec', function(done) {
-        _scaffold('filter', function () {
-            var actual = grunt.file.read('tmp/My.js');
-            var expected = grunt.file.read('test/expected/My.js');
+    it('should scaffold according to filter spec', (done) => {
+        testScaffold('filter', () => {
+            const actual = grunt.file.read('tmp/My.js');
+            const expected = grunt.file.read('test/expected/My.js');
             expect(actual).to.eql(expected);
             done();
         });
     });
 
-    it('should scaffold according to folders spec', function(done) {
-        _scaffold('folders', function () {
-            var actual = grunt.file.read('tmp/folderA/a.js');
-            var expected = grunt.file.read('test/expected/folderA/a.js');
+    it('should scaffold according to folders spec', (done) => {
+        testScaffold('folders', () => {
+            const actual = grunt.file.read('tmp/folderA/a.js');
+            const expected = grunt.file.read('test/expected/folderA/a.js');
 
             expect(actual).to.eql(expected);
 
-            actual = grunt.file.read('tmp/folderA/My.js');
-            expected = grunt.file.read('test/expected/folderA/My.js');
+            const actualA = grunt.file.read('tmp/folderA/My.js');
+            const expectedA = grunt.file.read('test/expected/folderA/My.js');
 
-            expect(actual).to.eql(expected);
+            expect(actualA).to.eql(expectedA);
 
-            actual = grunt.file.read('tmp/folderB/b.js');
-            expected = grunt.file.read('test/expected/folderB/b.js');
+            const actualB = grunt.file.read('tmp/folderB/b.js');
+            const expectedB = grunt.file.read('test/expected/folderB/b.js');
 
-            expect(actual).to.eql(expected);
+            expect(actualB).to.eql(expectedB);
             done();
         });
     });

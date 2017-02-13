@@ -6,16 +6,16 @@
 * Licensed under the MIT license.
 */
 
-'use strict';
-
 module.exports = {
-    jshint: {
+    eslint: {
         all: [
+            'config.js',
             'Gruntfile.js',
+            'test/*_test.js',
             'tasks/**/*.js'
         ],
         options: {
-            jshintrc: '.jshintrc'
+            configFile: '.eslintrc'
         }
     },
 
@@ -27,7 +27,7 @@ module.exports = {
     copy: {
         main: {
             files: [
-                {expand: true, cwd: 'test', src: ['**'], dest: 'tmp'}
+                { expand: true, cwd: 'test', src: ['**'], dest: 'tmp' }
             ]
         }
     },
@@ -46,14 +46,15 @@ module.exports = {
         },
         filter: {
             options: {
-                template: function () {
+                template: () => {
                     return {
                         'tmp/fixtures/test.js': 'tmp/{{name}}.js'
                     };
                 },
-                filter: function (result) {
-                    result.name = 'My';
-                    return result;
+                filter: (result) => {
+                    const obj = result;
+                    obj.name = 'My';
+                    return obj;
                 }
             }
         },
@@ -63,11 +64,12 @@ module.exports = {
                     'tmp/fixtures/folderA': 'tmp/folderA',
                     'tmp/fixtures/folderB': 'tmp/folderB'
                 },
-                filter: function (result) {
-                    result.name = 'My';
-                    result.priority = 'High';
-                    result.severity = 'Low';
-                    return result;
+                filter: (result) => {
+                    const obj = result;
+                    obj.name = 'My';
+                    obj.priority = 'High';
+                    obj.severity = 'Low';
+                    return obj;
                 }
             }
         }
