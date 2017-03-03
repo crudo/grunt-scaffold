@@ -21,7 +21,7 @@
   "dependencies": {
     "fs-extra": "2.0.0",
     "fs-readdir-recursive": "1.0.0",
-    "inquirer": "3.0.5",
+    "inquirer": "3.0.6",
     "lodash.isfunction": "3.0.8",
     "mustache": "2.3.0"
   },
